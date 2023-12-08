@@ -6,12 +6,21 @@ use App\Http\Controllers\productController;
 use App\Http\Controllers\roleController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\AdminAuth;
 
+
+// Website Routes
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('admin')->group(function () {
+// Login Routes
+Route::get('admin/login', [userController::class, 'loginPage']);
+Route::post('admin/checkUser', [userController::class, 'checkUser']);
+Route::get('admin/logout', [userController::class, 'logout']);
+
+// Admin Routes
+Route::prefix('admin')->middleware(AdminAuth::class)->group(function () {
 
     // Main Admin Routes
     Route::view('/', 'admin.index');
@@ -27,8 +36,8 @@ Route::prefix('admin')->group(function () {
 
     // Orders Routes
     Route::get('/orders', [orderController::class, 'index']);
-    Route::get('/orders/completeOrder/{id}', [orderController::class, 'completeOrder']);    
-    Route::get('/orders/notAvailable/{id}', [orderController::class, 'notAvailable']);    
+    Route::get('/orders/completeOrder/{id}', [orderController::class, 'completeOrder']);
+    Route::get('/orders/notAvailable/{id}', [orderController::class, 'notAvailable']);
 
     // Roles Routes
     Route::post('/roles/insert', [roleController::class, 'insert']);
