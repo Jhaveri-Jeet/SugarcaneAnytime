@@ -1,18 +1,23 @@
 <?php
 
 use App\Http\Controllers\feedbackController;
+use App\Http\Controllers\heroSectionController;
 use App\Http\Controllers\orderController;
 use App\Http\Controllers\productController;
 use App\Http\Controllers\roleController;
+use App\Http\Controllers\shopController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminAuth;
 
 
 // Website Routes
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [heroSectionController::class, 'showHeroSection']);
+Route::get('/aboutUs', [heroSectionController::class, 'showHeroSection']);
+Route::get('/services', [heroSectionController::class, 'showHeroSection']);
+Route::get('/contactUs', [heroSectionController::class, 'showHeroSection']);
+Route::get('/shop', [shopController::class, 'index']);
+Route::view('/cart', 'cart');
 
 // Login Routes
 Route::get('admin/login', [userController::class, 'loginPage']);
