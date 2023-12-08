@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class userController extends Controller
 {
@@ -34,17 +34,8 @@ class userController extends Controller
         return view('admin.users', ['users' => users::get()]);
     }
 
-    public function insert(Request $request)
+    public function insert(UserRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'password' => 'required',
-            'email' => 'required',
-            'number' => 'required',
-            'address' => 'required',
-            'roleId' => 'required',
-        ]);
-
         $hashedPassword = bcrypt($request->password);
         $user = new users();
         $user->name = $request->name;
@@ -59,17 +50,8 @@ class userController extends Controller
         return back()->with(['sucess' => 'user created successfully']);
     }
 
-    public function update(Request $request, $id)
+    public function update(UserRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'password' => 'required',
-            'email' => 'required',
-            'number' => 'required',
-            'address' => 'required',
-            'roleId' => 'required',
-        ]);
-
         $user = users::where('id', $id)->first();
         $user->name = $request->name;
         $user->password = $request->password;

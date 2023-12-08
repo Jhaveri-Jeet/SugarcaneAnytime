@@ -2,17 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleRequest;
 use App\Models\roles;
-use Illuminate\Http\Request;
 
 class roleController extends Controller
 {
-    public function insert(Request $request)
+    public function insert(RoleRequest $request)
     {
-        $request . validator([
-            'name' => 'required'
-        ]);
-
         $role = new roles();
         $role->name = $request->name;
 

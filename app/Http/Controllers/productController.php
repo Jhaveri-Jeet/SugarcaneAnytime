@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProductRequest;
 use App\Models\products;
-use Illuminate\Http\Request;
 
 class productController extends Controller
 {
@@ -23,20 +23,12 @@ class productController extends Controller
         return view('admin.editProduct', ['product' => $product]);
     }
 
-    public function insert(Request $request)
+    public function insert(ProductRequest $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'currentQuantity' => 'required',
-            'image' => 'required|mimes:jpeg,png,jpg',
-        ]);
 
         $imageName = time() . '.' . $request->image->extension();
         $request->image->move(public_path('uploads'), $imageName);
 
-        // dd($request->all());
         $product = new products();
         $product->name = $request->name;
         $product->description = $request->description;
@@ -48,16 +40,8 @@ class productController extends Controller
         return redirect('/admin/products');
     }
 
-    public function update(Request $request, $id)
+    public function update(ProductRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'price' => 'required',
-            'currentQuantity' => 'required',
-            'image' => 'nullable|mimes:jpeg,png,jpg',
-        ]);
-
         $product = products::where('id', $id)->first();
         if ($request->image) {
             $imageName = time() . '.' . $request->image->extension();

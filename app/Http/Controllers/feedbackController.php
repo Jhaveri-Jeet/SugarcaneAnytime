@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\FeedbackRequest;
 use App\Models\feedback;
-use Illuminate\Http\Request;
 
 class feedbackController extends Controller
 {
@@ -12,13 +12,8 @@ class feedbackController extends Controller
         return view('admin.feedback', ['feedbacks' => feedback::latest()->get()]);
     }
 
-    public function insert(Request $request)
+    public function insert(FeedbackRequest $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-        ]);
-
         $feedback = new feedback();
         $feedback->title = $request->title;
         $feedback->description = $request->description;
