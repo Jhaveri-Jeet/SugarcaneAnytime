@@ -9,7 +9,7 @@ use App\Http\Controllers\shopController;
 use App\Http\Controllers\userController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminAuth;
-
+use App\Http\Middleware\UserAuth;
 
 // Website Routes
 Route::get('/', [heroSectionController::class, 'showHeroSection']);
@@ -17,11 +17,16 @@ Route::get('/aboutUs', [heroSectionController::class, 'showHeroSection']);
 Route::get('/services', [heroSectionController::class, 'showHeroSection']);
 Route::get('/contactUs', [heroSectionController::class, 'showHeroSection']);
 Route::get('/shop', [shopController::class, 'index']);
-Route::view('/cart', 'cart');
+Route::view('/cart', 'cart')->middleware(UserAuth::class);
+Route::view('/login', 'login');
+Route::post('/checkUser', [userController::class, 'checkUser']);
+Route::view('/register', 'register');
+Route::post('/users/insert', [userController::class, 'userInsert']);
+Route::get('/logout', [userController::class, 'logout']);
 
 // Login Routes
 Route::get('admin/login', [userController::class, 'loginPage']);
-Route::post('admin/checkUser', [userController::class, 'checkUser']);
+Route::post('admin/checkUser', [userController::class, 'checkAdmin']);
 Route::get('admin/logout', [userController::class, 'logout']);
 
 // Admin Routes

@@ -14,10 +14,19 @@ class userController extends Controller
         return view('admin.login');
     }
 
-    public function checkUser(Request $request)
+    public function checkAdmin(Request $request)
     {
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'roleId' => 1])) {
             return redirect('admin/main');
+        } else {
+            return back()->with(['error' => 'Invalid email or password']);
+        }
+    }
+
+    public function checkUser(Request $request)
+    {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'roleId' => 2])) {
+            return redirect('/');
         } else {
             return back()->with(['error' => 'Invalid email or password']);
         }
@@ -34,6 +43,27 @@ class userController extends Controller
         return view('admin.users', ['users' => users::get()]);
     }
 
+    public function userInsert(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'password' => 'required',
+            'email' => 'required',
+            'number' => 'required',
+        ]);
+
+        $hashedPassword = bcrypt($request->password);
+        $user = new users();
+        $user->name = $request->name;
+        $user->password = $hashedPassword;
+        $user->email = $request->email;
+        $user->number = $request->number;
+        $user->address = '';
+        $user->roleId = 2;
+        $user->save();
+        return redirect('/login');
+    }
+
     public function insert(UserRequest $request)
     {
         $hashedPassword = bcrypt($request->password);
@@ -43,11 +73,9 @@ class userController extends Controller
         $user->email = $request->email;
         $user->number = $request->number;
         $user->address = $request->address;
-        $user->roleId = $request->roleId;
-
+        $user->roleId = 1;
         $user->save();
-        Auth::login($user);
-        return back()->with(['sucess' => 'user created successfully']);
+        return redirect('/admin/login');
     }
 
     public function update(UserRequest $request, $id)

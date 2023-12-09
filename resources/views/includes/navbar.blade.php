@@ -18,8 +18,17 @@
                     <li><a class="nav-link" href="/contactUs">Contact us</a></li>
                 </ul>
                 <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                    <li><a class="nav-link" href="#"><img src="images/user.svg"></a></li>
-                    <li><a class="nav-link" href="/cart"><img src="images/cart.svg"></a></li>
+                    @if (Auth::user())
+                        <li><a class="nav-link" href="/logout"><img
+                                    src="{{ URL::asset('frontend/images/logout.png') }}" width="18" height="20"></a>
+                        </li>
+                    @else
+                        <li><a class="nav-link" href="/login"><img
+                                    src="{{ URL::asset('frontend/images/user.svg') }}"></a>
+                        </li>
+                    @endif
+                    <li><a class="nav-link" href="/cart"><img src="{{ URL::asset('frontend/images/cart.svg') }}"></a>
+                    </li>
                 </ul>
             </div>
         </div>
