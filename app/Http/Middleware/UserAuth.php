@@ -15,6 +15,11 @@ class UserAuth
             return redirect('/login');
         }
 
+        $user = Auth::user();
+        if ($user->roleId != 2) {
+            return redirect('/login');
+        }
+
         return $next($request);
     }
 }

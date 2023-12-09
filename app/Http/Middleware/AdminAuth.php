@@ -15,6 +15,12 @@ class AdminAuth
             return redirect('/admin/login');
         }
 
+        $user = Auth::user();
+
+        if ($user->roleId != 1) {
+            return redirect('/admin/login');
+        }
+
         return $next($request);
     }
 }
