@@ -39,10 +39,10 @@
                     </button>
                 </div>
                 <div>
-                    <a class="navbar-brand brand-logo" href="index.html">
+                    <a class="navbar-brand brand-logo" href="/admin/main">
                         <img src="{{ URL::asset('images/logo.svg') }}" alt="logo" />
                     </a>
-                    <a class="navbar-brand brand-logo-mini" href="index.html">
+                    <a class="navbar-brand brand-logo-mini" href="/admin/main">
                         <img src="{{ URL::asset('images/logo-mini.svg') }}" alt="logo" />
                     </a>
                 </div>

@@ -93,9 +93,15 @@ class userController extends Controller
         return back()->with(['sucess' => 'user delete successfully']);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::logout();
-        return redirect('admin/login');
+        $path = $request->path();
+        if ($path === "admin/logout") {
+            Auth::logout();
+            return redirect('admin/login');
+        } else {
+            Auth::logout();
+            return redirect('/login');
+        }
     }
 }

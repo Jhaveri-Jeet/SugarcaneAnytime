@@ -22,7 +22,7 @@ Route::view('/login', 'login');
 Route::post('/checkUser', [userController::class, 'checkUser']);
 Route::view('/register', 'register');
 Route::post('/users/insert', [userController::class, 'userInsert']);
-Route::get('/logout', [userController::class, 'logout']);
+Route::get('/userLogout', [userController::class, 'logout']);
 
 // Login Routes
 Route::get('admin/login', [userController::class, 'loginPage']);

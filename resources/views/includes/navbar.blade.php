@@ -19,7 +19,7 @@
                 </ul>
                 <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                     @if (Auth::user() && Auth::user()->roleId == 2)
-                        <li><a class="nav-link" href="/logout"><img src="{{ URL::asset('frontend/images/logout.png') }}"
+                        <li><a class="nav-link" href="/userLogout"><img src="{{ URL::asset('frontend/images/logout.png') }}"
                                     width="18" height="20"></a>
                         </li>
                     @else
