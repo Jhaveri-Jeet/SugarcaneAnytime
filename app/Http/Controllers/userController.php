@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class userController extends Controller
 {
+    public function index()
+    {
+        return view('admin.users', ['users' => users::get()]);
+    }
+
     public function loginPage()
     {
         return view('admin.login');
@@ -30,17 +35,6 @@ class userController extends Controller
         } else {
             return back()->with(['error' => 'Invalid email or password']);
         }
-    }
-
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('admin/login');
-    }
-
-    public function index()
-    {
-        return view('admin.users', ['users' => users::get()]);
     }
 
     public function userInsert(Request $request)
@@ -97,5 +91,11 @@ class userController extends Controller
         $user = users::where('id', $id)->first();
         $user->delete();
         return back()->with(['sucess' => 'user delete successfully']);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('admin/login');
     }
 }
