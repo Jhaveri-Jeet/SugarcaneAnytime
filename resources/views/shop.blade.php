@@ -1,6 +1,6 @@
 @include('includes.header')
 @include('includes.navbar')
-{{-- 
+
 <!-- Start Hero Section -->
 <div class="hero">
     <div class="container">
@@ -16,7 +16,7 @@
         </div>
     </div>
 </div>
-<!-- End Hero Section --> --}}
+<!-- End Hero Section -->
 
 <div class="untree_co-section product-section before-footer-section">
     <div class="container">
