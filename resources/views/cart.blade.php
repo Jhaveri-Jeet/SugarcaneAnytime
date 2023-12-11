@@ -32,68 +32,28 @@
                                 <th class="product-name">Product</th>
                                 <th class="product-price">Price</th>
                                 <th class="product-quantity">Quantity</th>
-                                <th class="product-total">Total</th>
                                 <th class="product-remove">Remove</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <img src="images/product-1.png" alt="Image" class="img-fluid">
-                                </td>
-                                <td class="product-name">
-                                    <h2 class="h5 text-black">Product 1</h2>
-                                </td>
-                                <td>$49.00</td>
-                                <td>
-                                    <div class="input-group mb-3 d-flex align-items-center quantity-container"
-                                        style="max-width: 120px;">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-outline-black decrease"
-                                                type="button">&minus;</button>
-                                        </div>
-                                        <input type="text" class="form-control text-center quantity-amount"
-                                            value="1" placeholder="" aria-label="Example text with button addon"
-                                            aria-describedby="button-addon1">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-black increase"
-                                                type="button">&plus;</button>
-                                        </div>
-                                    </div>
-
-                                </td>
-                                <td>$49.00</td>
-                                <td><a href="#" class="btn btn-black btn-sm">X</a></td>
-                            </tr>
-
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <img src="images/product-2.png" alt="Image" class="img-fluid">
-                                </td>
-                                <td class="product-name">
-                                    <h2 class="h5 text-black">Product 2</h2>
-                                </td>
-                                <td>$49.00</td>
-                                <td>
-                                    <div class="input-group mb-3 d-flex align-items-center quantity-container"
-                                        style="max-width: 120px;">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-outline-black decrease"
-                                                type="button">&minus;</button>
-                                        </div>
-                                        <input type="text" class="form-control text-center quantity-amount"
-                                            value="1" placeholder="" aria-label="Example text with button addon"
-                                            aria-describedby="button-addon1">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-black increase"
-                                                type="button">&plus;</button>
-                                        </div>
-                                    </div>
-
-                                </td>
-                                <td>$49.00</td>
-                                <td><a href="#" class="btn btn-black btn-sm">X</a></td>
-                            </tr>
+                            @foreach ($orders as $order)
+                                <tr>
+                                    <td class="product-thumbnail">
+                                        <img src="{{ URL::asset('uploads/') . '/' . $order->product->image }}"
+                                            alt="Image" class="img-fluid">
+                                    </td>
+                                    <td class="product-name">
+                                        <h2 class="h5 text-black">{{ $order->product->name }}</h2>
+                                    </td>
+                                    <td>₹ {{ $order->price }}</td>
+                                    <td>
+                                        {{ $order->quantity }}
+                                    </td>
+                                    <td><a href="#" class="btn btn-black btn-sm"
+                                            onclick="removeFromCart({{ $order->productId }},{{ Auth::user()->id }})">X</a>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -103,23 +63,9 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="row mb-5">
-                    <div class="col-md-6 mb-3 mb-md-0">
-                        <button class="btn btn-black btn-sm btn-block">Update Cart</button>
-                    </div>
                     <div class="col-md-6">
-                        <button class="btn btn-outline-black btn-sm btn-block">Continue Shopping</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="text-black h4" for="coupon">Coupon</label>
-                        <p>Enter your coupon code if you have one.</p>
-                    </div>
-                    <div class="col-md-8 mb-3 mb-md-0">
-                        <input type="text" class="form-control py-3" id="coupon" placeholder="Coupon Code">
-                    </div>
-                    <div class="col-md-4">
-                        <button class="btn btn-black">Apply Coupon</button>
+                        <button class="btn btn-outline-black btn-sm btn-block"
+                            onclick="window.location='/shop'">Continue Shopping</button>
                     </div>
                 </div>
             </div>
@@ -133,25 +79,26 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <span class="text-black">Subtotal</span>
+                                <span class="text-black">Total Quantity</span>
                             </div>
                             <div class="col-md-6 text-right">
-                                <strong class="text-black">$230.00</strong>
+                                <strong class="text-black">{{ $totalQuantity }}</strong>
                             </div>
                         </div>
                         <div class="row mb-5">
                             <div class="col-md-6">
-                                <span class="text-black">Total</span>
+                                <span class="text-black">Total Price</span>
                             </div>
                             <div class="col-md-6 text-right">
-                                <strong class="text-black">$230.00</strong>
+                                <strong class="text-black">₹ {{ $totalPrice }}</strong>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-12">
                                 <button class="btn btn-black btn-lg py-3 btn-block"
-                                    onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                                    onclick="window.location='/purchaseOrder/{{ Auth::user()->id }}'">Make a
+                                    purchase</button>
                             </div>
                         </div>
                     </div>
@@ -164,4 +111,29 @@
 
 @include('includes.footer')
 @include('includes.scripts')
+<script>
+    function removeFromCart(productId, userId) {
+        let data = {
+            productId: productId,
+            userId: userId
+        }
+        let csrfToken = $('meta[name="csrf-token"]').attr('content');
+        console.log(data);
+        $.ajax({
+            url: '/removeOrder',
+            type: 'POST',
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': csrfToken
+            },
+            success: function(response) {
+                console.log(response);
+                window.location = '/cart'
+            },
+            error: function(error) {
+                console.log(error);
+            }
+        });
+    }
+</script>
 @include('includes.pageEnd')

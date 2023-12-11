@@ -1,8 +1,9 @@
 <body>
-    <!-- Start Header/Navigation -->
     <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
         <div class="container">
-            <a class="navbar-brand" href="/">Furni<span>.</span></a>
+            <img src="{{ URL::asset('frontend/images/logo-removebg.png') }}" alt="Sugarcane Anytime" height="20%"
+                width="20%">
+            {{-- <a class="navbar-brand" href="/">Sugarcane Anytime<span>.</span></a> --}}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni"
                 aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -17,10 +18,21 @@
                     <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="/contactUs">Contact us</a></li>
                 </ul>
+                <!-- ... (previous code) ... -->
                 <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                     @if (Auth::user() && Auth::user()->roleId == 2)
-                        <li><a class="nav-link" href="/userLogout"><img src="{{ URL::asset('frontend/images/logout.png') }}"
-                                    width="18" height="20"></a>
+                        <li>
+                            <div class="dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" id="userDropdown"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ Auth::user()->name }}
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="/">Profile</a>
+                                    <a class="dropdown-item" href="/orders">Orders</a>
+                                    <a class="dropdown-item" href="/userLogout">Logout</a>
+                                </div>
+                            </div>
                         </li>
                     @else
                         <li><a class="nav-link" href="/login"><img
@@ -33,4 +45,3 @@
             </div>
         </div>
     </nav>
-    <!-- End Header/Navigation -->

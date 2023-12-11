@@ -30,7 +30,7 @@
                                             <td>{{ $order->price }}</td>
                                             <td>{{ $order->quantity }}</td>
                                             <td>{{ $order->status }}</td>
-                                            @if ($order->status === 'pending')
+                                            @if ($order->status === 'ordered')
                                                 <td><a href="/admin/orders/completeOrder/{{ $order->id }}"
                                                         class="btn btn-dark">Complete</a></td>
                                                 <td> <a href="/admin/orders/notAvailable/{{ $order->id }}"

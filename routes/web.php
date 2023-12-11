@@ -13,18 +13,35 @@ use App\Http\Middleware\UserAuth;
 
 // Website Routes
 Route::get('/', [heroSectionController::class, 'showHeroSection']);
+
+// About Us Route
 Route::get('/aboutUs', [heroSectionController::class, 'showHeroSection']);
+
+// Services Route
 Route::get('/services', [heroSectionController::class, 'showHeroSection']);
+
+// Contact Us Route
 Route::get('/contactUs', [heroSectionController::class, 'showHeroSection']);
+
+// Shop Routes
 Route::get('/shop', [shopController::class, 'index']);
+Route::post('/createOrder', [shopController::class, 'createOrder']);
+
+// Cart Routes
 Route::view('/cart', 'cart')->middleware(UserAuth::class);
+Route::get('/cart', [orderController::class, 'userIndex']);
+Route::get('/orders', [orderController::class, 'getAllUserOrders']);
+Route::post('/removeOrder', [orderController::class, 'removeOrder']);
+Route::get('/purchaseOrder/{id}', [orderController::class, 'purchaseOrder']);
+
+// User Login Routes 
 Route::view('/login', 'login');
 Route::post('/checkUser', [userController::class, 'checkUser']);
 Route::view('/register', 'register');
 Route::post('/users/insert', [userController::class, 'userInsert']);
 Route::get('/userLogout', [userController::class, 'logout']);
 
-// Login Routes
+// Admin Login Routes
 Route::get('admin/login', [userController::class, 'loginPage']);
 Route::post('admin/checkUser', [userController::class, 'checkAdmin']);
 Route::get('admin/logout', [userController::class, 'logout']);
@@ -45,7 +62,7 @@ Route::prefix('admin')->middleware(AdminAuth::class)->group(function () {
     Route::put('/products/update/{id}', [productController::class, 'update']);
 
     // Orders Routes
-    Route::get('/orders', [orderController::class, 'index']);
+    Route::get('/orders', [orderController::class, 'adminIndex']);
     Route::get('/orders/completeOrder/{id}', [orderController::class, 'completeOrder']);
     Route::get('/orders/notAvailable/{id}', [orderController::class, 'notAvailable']);
 
