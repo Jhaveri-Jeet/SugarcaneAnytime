@@ -29,7 +29,7 @@ Route::post('/createOrder', [shopController::class, 'createOrder']);
 
 // Cart Routes
 Route::view('/cart', 'cart')->middleware(UserAuth::class);
-Route::get('/cart', [orderController::class, 'userIndex']);
+Route::get('/cart', [orderController::class, 'userIndex'])->middleware(UserAuth::class);
 Route::get('/orders', [orderController::class, 'getAllUserOrders']);
 Route::post('/removeOrder', [orderController::class, 'removeOrder']);
 Route::get('/purchaseOrder/{id}', [orderController::class, 'purchaseOrder']);
@@ -38,6 +38,7 @@ Route::get('/purchaseOrder/{id}', [orderController::class, 'purchaseOrder']);
 Route::view('/login', 'login');
 Route::post('/checkUser', [userController::class, 'checkUser']);
 Route::view('/register', 'register');
+Route::get('/profile', [userController::class, 'profileDisplay'])->middleware(UserAuth::class);
 Route::post('/users/insert', [userController::class, 'userInsert']);
 Route::get('/userLogout', [userController::class, 'logout']);
 

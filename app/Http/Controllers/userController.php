@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Models\orders;
 use App\Models\users;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -103,5 +104,15 @@ class userController extends Controller
             Auth::logout();
             return redirect('/login');
         }
+    }
+
+    public function profileDisplay()
+    {
+        $userId = Auth::user()->id;
+        $user = users::where('id', $userId)->first();
+        $totalOrderPlaced = orders::where('userId', $userId)->count();
+        $totalAmountOfOrderPlaced = orders::where('userId', $userId)->sum('price');
+        $totalPendingOrder = orders::where('userId', $userId)->where('status', 'pending')->sum('price');
+        return view('/profile', ['user' => $user, 'totalOrderPlaced' => $totalOrderPlaced, 'totalAmountOfOrderPlaced' => $totalAmountOfOrderPlaced, 'totalPendingOrder' => $totalPendingOrder]);
     }
 }
