@@ -30,7 +30,7 @@ Route::post('/createOrder', [shopController::class, 'createOrder']);
 // Cart Routes
 Route::view('/cart', 'cart')->middleware(UserAuth::class);
 Route::get('/cart', [orderController::class, 'userIndex'])->middleware(UserAuth::class);
-Route::get('/orders', [orderController::class, 'getAllUserOrders']);
+Route::get('/orders', [orderController::class, 'getAllUserOrders'])->middleware(UserAuth::class);
 Route::post('/removeOrder', [orderController::class, 'removeOrder']);
 Route::get('/purchaseOrder/{id}', [orderController::class, 'purchaseOrder']);
 

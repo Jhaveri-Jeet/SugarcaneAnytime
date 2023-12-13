@@ -23,10 +23,12 @@
         <div class="row">
             @foreach ($products as $product)
                 <div class="col-12 col-md-4 col-lg-3 mb-5">
-                    <a class="product-item" href="#">
+                    <a class="product-item" href="">
                         <img src="{{ URL::asset('uploads/') . '/' . $product->image }}"
                             class="img-fluid product-thumbnail">
-                        <input type="hidden" id="userId" value="{{ Auth::user()->id }}" />
+                        @if (Auth::check())
+                            <input type="hidden" id="userId" value="{{ Auth::user()->id }}" />
+                        @endif
                         <input type="hidden" id="productId" value="{{ $product->id }}" />
                         <input type="hidden" id="price" value="{{ $product->price }}" />
                         <h3 class="product-title">{{ $product->name }}</h3>
@@ -46,8 +48,14 @@
 @include('includes.scripts')
 <script>
     function createOrder(productId, price) {
+        var userId = $("#userId").val();
+        if (!userId) {
+            alert("Login first to add to cart");
+            return;
+        }
+
         let data = {
-            userId: $("#userId").val(),
+            userId: userId,
             productId: productId,
             price: price,
             quantity: 1,

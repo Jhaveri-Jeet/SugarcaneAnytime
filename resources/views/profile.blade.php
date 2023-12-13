@@ -45,6 +45,7 @@
                                 <p>{{ $user->number }}</p>
                             </div>
                         </div>
+                        <button class="mt-4 mb-4 btn btn-primary">Update Profile</button>
                     </div>
                 </div>
             </div>
