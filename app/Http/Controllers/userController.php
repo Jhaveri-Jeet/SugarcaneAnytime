@@ -73,18 +73,15 @@ class userController extends Controller
         return redirect('/admin/login');
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $user = users::where('id', $id)->first();
-        $user->name = $request->name;
-        $user->password = $request->password;
         $user->email = $request->email;
         $user->number = $request->number;
         $user->address = $request->address;
-        $user->roleId = $request->roleId;
 
         $user->save();
-        return back()->with(['sucess' => 'user updateds successfully']);
+        return back()->with(['sucess' => 'user updated successfully']);
     }
 
     public function delete($id)

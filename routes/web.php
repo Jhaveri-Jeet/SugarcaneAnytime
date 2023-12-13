@@ -27,6 +27,9 @@ Route::get('/contactUs', [heroSectionController::class, 'showHeroSection']);
 Route::get('/shop', [shopController::class, 'index']);
 Route::post('/createOrder', [shopController::class, 'createOrder']);
 
+// Feedback Routes
+Route::post('/feedback', [feedbackController::class, 'insert']);
+
 // Cart Routes
 Route::view('/cart', 'cart')->middleware(UserAuth::class);
 Route::get('/cart', [orderController::class, 'userIndex'])->middleware(UserAuth::class);
@@ -41,6 +44,7 @@ Route::view('/register', 'register');
 Route::get('/profile', [userController::class, 'profileDisplay'])->middleware(UserAuth::class);
 Route::post('/users/insert', [userController::class, 'userInsert']);
 Route::get('/userLogout', [userController::class, 'logout']);
+Route::post('/users/update/{id}', [userController::class, 'update']);
 
 // Admin Login Routes
 Route::get('admin/login', [userController::class, 'loginPage']);
@@ -73,11 +77,9 @@ Route::prefix('admin')->middleware(AdminAuth::class)->group(function () {
     // Users Routes
     Route::get('/users', [userController::class, 'index']);
     Route::post('/users/insert', [userController::class, 'insert']);
-    Route::put('/users/update/{id}', [userController::class, 'update']);
     Route::get('/users/delete/{id}', [userController::class, 'delete']);
 
     // Feedback Routes
     Route::get('/feedback', [feedbackController::class, 'index']);
-    Route::post('/feedback/insert', [feedbackController::class, 'insert']);
     Route::get('/feedback/delete/{id}', [feedbackController::class, 'delete']);
 });

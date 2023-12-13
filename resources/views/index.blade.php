@@ -178,22 +178,19 @@
                         <span class="next" data-controls="next"><span class="fa fa-chevron-right"></span></span>
                     </div>
                     <div class="testimonial-slider">
-                        <div class="item">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-8 mx-auto">
-                                    <div class="testimonial-block text-center">
-                                        <blockquote class="mb-5">
-                                            <p>&ldquo;Donec facilisis quam ut purus rutrum lobortis. Donec vitae
-                                                odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                                                vulputate velit imperdiet dolor tempor tristique. Pellentesque
-                                                habitant morbi tristique senectus et netus et malesuada fames ac
-                                                turpis egestas. Integer convallis volutpat dui quis
-                                                scelerisque.&rdquo;</p>
-                                        </blockquote>
+                        @foreach ($data['feedbacks'] as $feedback)
+                            <div class="item">
+                                <div class="row justify-content-center">
+                                    <div class="col-lg-8 mx-auto">
+                                        <div class="testimonial-block text-center">
+                                            <blockquote class="mb-5">
+                                                <p>&ldquo;{{$feedback->description}}&rdquo;</p>
+                                            </blockquote>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

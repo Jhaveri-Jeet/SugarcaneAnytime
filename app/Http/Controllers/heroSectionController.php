@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\feedback;
 use Illuminate\Http\Request;
 
 class heroSectionController extends Controller
@@ -16,6 +17,7 @@ class heroSectionController extends Controller
                 'title' => "Modern Interior Design Studio",
                 'description' => 'Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
                 vulputate velit imperdiet dolor tempor tristique.',
+                'feedbacks' => feedback::get(),
             ];
 
             return view('index', ['data' => $data]);
