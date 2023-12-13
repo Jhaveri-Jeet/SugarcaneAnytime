@@ -15,7 +15,6 @@
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/shop">Shop</a></li>
                     <li class="nav-item"><a class="nav-link" href="/aboutUs">About us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/services">Services</a></li>
                     <li class="nav-item"><a class="nav-link" href="/contactUs">Contact us</a></li>
                 </ul>
                 <!-- ... (previous code) ... -->

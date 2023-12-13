@@ -14,9 +14,8 @@ class heroSectionController extends Controller
         // dd($path);
         if ($path === '/') {
             $data = [
-                'title' => "Modern Interior Design Studio",
-                'description' => 'Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                vulputate velit imperdiet dolor tempor tristique.',
+                'title' => "Fresh Sugarcane Juice",
+                'description' => 'Indulge in the natural sweetness of life with Sugarcane Anytime. Our sugarcane juice is a celebration of purity and freshness, straight from the fields to your glass.',
                 'feedbacks' => feedback::get(),
             ];
 
@@ -24,24 +23,15 @@ class heroSectionController extends Controller
         } elseif ($path === 'aboutUs') {
             $data = [
                 'title' => "About Us",
-                'description' => 'Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                vulputate velit imperdiet dolor tempor tristique.',
+                'description' => 'Welcome to Sugarcane Anytime, where we transform the simple pleasure of sugarcane juice into a journey of pure delight. Our story is one of passion, purity, and a commitment to delivering the finest sugarcane experience to your glass.',
+                'feedbacks' => feedback::get(),
             ];
 
             return view('/aboutUs', ['data' => $data]);
-        } elseif ($path === 'services') {
-            $data = [
-                'title' => "Services",
-                'description' => 'Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                vulputate velit imperdiet dolor tempor tristique.',
-            ];
-
-            return view('/services', ['data' => $data]);
         } elseif ($path === 'contactUs') {
             $data = [
                 'title' => "Contact Us",
-                'description' => 'Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam
-                vulputate velit imperdiet dolor tempor tristique.',
+                'description' => 'Contact us for FRESH, HEALTHY & TASTY sugarcane juice.',
             ];
 
             return view('/contactUs', ['data' => $data]);

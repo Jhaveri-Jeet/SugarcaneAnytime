@@ -6,7 +6,7 @@
                 <div class="intro-excerpt">
                     <h1>{{ $data['title'] }}</h1>
                     <p class="mb-4">{{ $data['description'] }}</p>
-                    <p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#"
+                    <p><a href="/shop" class="btn btn-secondary me-2">Shop Now</a><a href="/aboutUs"
                             class="btn btn-white-outline">Explore</a></p>
                 </div>
             </div>

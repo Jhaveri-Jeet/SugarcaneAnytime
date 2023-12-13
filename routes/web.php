@@ -17,9 +17,6 @@ Route::get('/', [heroSectionController::class, 'showHeroSection']);
 // About Us Route
 Route::get('/aboutUs', [heroSectionController::class, 'showHeroSection']);
 
-// Services Route
-Route::get('/services', [heroSectionController::class, 'showHeroSection']);
-
 // Contact Us Route
 Route::get('/contactUs', [heroSectionController::class, 'showHeroSection']);
 
