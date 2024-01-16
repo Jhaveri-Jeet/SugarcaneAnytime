@@ -1,4 +1,5 @@
 # SugarcaneAnytime
+![Screenshot 2024-01-17 020805](https://github.com/Jhaveri-Jeet/SugarcaneAnytime/assets/114752089/c6a887fc-860c-4c4f-bc22-37af21da3d4f)
 
 SugarcaneAnytime is a Laravel-based e-commerce platform tailored for sugarcane juice enthusiasts. Admins have access to a feature-rich dashboard for managing product listings, updating inventory, and setting prices dynamically. Users can enjoy a delightful shopping experience through a clean and intuitive interface, securely completing transactions. Experience the sweetness of convenience with SugarcaneAnytime.
 
